@@ -27,27 +27,13 @@
 
         <div class="collapse navbar-collapse flex-grow-0" id="navbarSupportedContent">
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-                        <i class="bi bi-house-door"></i>
+                <li class="nav-item" *ngFor="let item of navbarItems">
+                    <a class="nav-link" [routerLink]="item.link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                        <i class="bi" [ngClass]="item.icon"></i>
                     </a>
-                </li>   
-                <li class="nav-item">
-                    <a class="nav-link" routerLink="/a" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-                        <i class="bi bi-calendar4"></i>
-                    </a>
-                </li> 
-                <li class="nav-item">
-                    <a class="nav-link " routerLink="/a" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-                        <i class="bi bi-chat-left-text  "></i>
-                    </a>
-                </li> 
-                <li class="nav-item">
-                    <a class="nav-link" routerLink="/a" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-                        <i class="bi bi-person-circle"></i>
-                    </a>
-                </li>            
+                </li>
             </ul>
+            
         </div>
     </div>
 </nav>

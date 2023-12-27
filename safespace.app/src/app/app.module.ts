@@ -3,16 +3,17 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NavBarComponent } from './shared/components/nav-bar/nav-bar.component';
-
+import { CoreModule } from './core/core.module';
+import { SeekerDashboardModule } from './dashboards/seeker-dashboard/seeker-dashboard.module';
 @NgModule({
   declarations: [
     AppComponent,
-    NavBarComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    CoreModule,
+    SeekerDashboardModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
