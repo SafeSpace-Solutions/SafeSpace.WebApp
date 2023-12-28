@@ -1,1 +1,17 @@
-/* You can add global styles to this file, and also import other style files */
+@import "~bootstrap/dist/css/bootstrap.css";
+@import "~bootstrap-icons/font/bootstrap-icons.css";
+
+body{
+    background: #E6E6E6;
+}
+
+
+.title {
+    color: #2A62F1;
+    font-family: 'Inter', sans-serif;
+    font-size: 34px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal; // Adjust the line height as needed
+  }
+  

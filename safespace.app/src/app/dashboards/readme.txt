@@ -1,1 +1,0 @@
-This folder encompases all the components, modules and dependancies that come under seeker-dashboard, practitioner-dashboard and admin-dashboard
