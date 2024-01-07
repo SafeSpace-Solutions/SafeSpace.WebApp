@@ -1,5 +1,5 @@
 {
-  "name": "safespace.app",
+  "name": "SafeSpace.WebApp",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
