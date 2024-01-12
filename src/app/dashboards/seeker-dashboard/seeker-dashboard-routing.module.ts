@@ -15,7 +15,7 @@ const routes: Routes = [
       { path: 'chat', component: ChatComponent },
       { path: 'profile', component: UserProfileComponent },
       { path: 'my-appointments', component: SeekerAppointmentsComponent },
-      { path: '', redirectTo: 'home', pathMatch: 'full' }, // Default to 'home' if no sub-route is provided
+      { path: '', redirectTo: 'home', pathMatch: 'full' }
     ]
   },
 ];

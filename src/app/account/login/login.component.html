@@ -7,33 +7,29 @@
                     <h3 class="pt-3 font-weight-bold">Login</h3>
                 </div>
                 <div class="panel-body p-3">
-                    <!-- <form [formGroup] = "loginForm"> -->
+                    <form [formGroup]="loginForm" (ngSubmit)="login()" autocomplete="off">
                         <div class="form-group pt-3">
-                            <div class="input-field">
+                            <div class="input-field" [class.error]="submitted && loginForm.get('email')?.errors">
                                 <span class="fa fa-user p-2"></span>
-                                <input type="text" placeholder="Username">
+                                <input formControlName="email" type="text" placeholder="Email">
                             </div>
                         </div>
-                        <!-- <small *ngIf="loginForm.controls['username'].dirty && loginForm.hasError('required', 'username')" class="text-danger">Username is required</small> -->
+                        <small *ngIf="submitted && loginForm.get('email')?.hasError('required')"
+                            class="text-danger">Email is required</small>
                         <div class="form-group pt-3">
-                            <div class="input-field">
+                            <div class="input-field" [class.error]="submitted && loginForm.get('password')?.errors">
                                 <span class="fa fa-lock p-2"></span>
-                                <input placeholder="Password">
-                                <!-- <span (click)="hideShowPass()" class="fa {{eyeIcon}}"></span> -->
+                                <input formControlName="password" [type]="inputType" placeholder="Password">
+                                <span (click)="togglePasswordVisibility()" class="bi {{eyeIcon}}"></span>
                             </div>
                         </div>
-                        <!-- <small *ngIf="loginForm.controls['password'].dirty && loginForm.hasError('required', 'password')" class="text-danger">Password is required</small> -->
-                        <div class="form-inline fr mt-4">
-                            <a id="forget" class="font-weight-bold">Forget Password</a>
-                        </div>
+                        <small *ngIf="submitted && loginForm.get('password')?.hasError('required')"
+                            class="text-danger">Password is required</small>
                         <button type="submit" class="btn btn-primary btn-block mt-4 w-100">Login</button>
                         <div class="text-center pt-4 text-muted">
                             Don't have an account? <a id="forget" routerLink="/account/register">Register now</a>
                         </div>
-                    <!-- </form> -->
-                </div>
-                <div  class="mx-3 my-2 py-2 bordert">
-                    <div class="text-center py-3"></div>
+                    </form>
                 </div>
                </div> 
             </div>
