@@ -15,13 +15,7 @@ export class SeekerDashboardComponent {
   constructor(private router: Router, private location: Location) { }
 
   public ngOnInit(): void {
-    const currentPath = this.location.path();
-
-    if (!currentPath || currentPath === '/') {
-      this.router.navigate(['/home']);
-    } else {
-      this.router.navigate([currentPath]);
-    }
+    
   }
 }
 
