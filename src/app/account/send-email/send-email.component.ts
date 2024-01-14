@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { AccountService } from '../account.service';
@@ -11,36 +11,42 @@ import { MESSAGE_CONSTANTS, TOAST_MESSAGE_CONSTANTS } from 'src/app/shared/const
   templateUrl: './send-email.component.html',
   styleUrls: ['./send-email.component.scss']
 })
-export class SendEmailComponent {
+export class SendEmailComponent implements OnInit, OnDestroy {
+
   public sendEmailForm: FormGroup = new FormGroup({});
-  submitted = false;
-  errorMessages: string[] = [];
-  loader = false;
+  public submitted = false;
+  public loader = false;
 
   private subscriptions: Array<Subscription> = [];
 
-  constructor(private accountService: AccountService, private formBuilder: FormBuilder, private toast: NgToastService, private router: Router) { }
-  
+  constructor(private accountService: AccountService,
+    private formBuilder: FormBuilder,
+    private toast: NgToastService,
+    private router: Router) { }
+
   public ngOnInit(): void {
     this.initializeForm();
   }
 
-  public sendEmail(){
+  public ngOnDestroy(): void {
+    this.subscriptions.forEach(subscription => subscription.unsubscribe());
+  }
 
-    if(this.sendEmailForm.valid){
+  public sendEmail(): void {
+    if (this.sendEmailForm.valid) {
       this.loader = true;
       this.subscriptions.push(
         this.accountService.forgotPassword(this.sendEmailForm.get('email')?.value).subscribe({
-          next: (response) =>{
+          next: () => {
             this.toast.success(TOAST_MESSAGE_CONSTANTS.SUCCESS.PASSWORD_RESET_EMAIL_SENT);
             this.router.navigateByUrl('/account/login');
           },
-          error: (error) =>{
+          error: (error) => {
             this.loader = false;
-            if(error.error === MESSAGE_CONSTANTS.ERRORS.EMAIL_DOES_NOT_EXIST){
+            if (error.error === MESSAGE_CONSTANTS.ERRORS.EMAIL_DOES_NOT_EXIST) {
               this.toast.error(TOAST_MESSAGE_CONSTANTS.ERRORS.EMAIL_DOES_NOT_EXIST);
             }
-            else{
+            else {
               this.toast.error(TOAST_MESSAGE_CONSTANTS.ERRORS.SERVER_ERROR);
             }
           }
@@ -48,11 +54,6 @@ export class SendEmailComponent {
       )
     }
     this.submitted = true;
-  
-  }
-
-  public ngOnDestroy(): void {
-    this.subscriptions.forEach(subscription => subscription.unsubscribe());
   }
 
   private initializeForm(): void {
