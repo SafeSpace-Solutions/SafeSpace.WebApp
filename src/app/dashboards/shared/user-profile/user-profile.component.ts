@@ -25,6 +25,5 @@ export class UserProfileComponent implements OnInit{
     )
   }
   public logout(): void {
-    this.router.navigateByUrl('/account/login');
-  }
+    this.accountService.logout();  }
 }
