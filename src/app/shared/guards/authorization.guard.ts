@@ -2,9 +2,9 @@ import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
 import { AccountService } from 'src/app/account/account.service';
 import { User } from '../interfaces/common.interfaces';
-import { map } from 'rxjs';
+import { Observable, map } from 'rxjs';
 
-export const authorizationGuard: CanActivateFn = () => {
+export const authorizationGuard: CanActivateFn = (): Observable<boolean> => {
   const accountService = inject(AccountService);
   const router = inject(Router)
   return accountService.user$.pipe(
@@ -16,4 +16,5 @@ export const authorizationGuard: CanActivateFn = () => {
         return false;
       }
     })
-  );};
+  );
+};

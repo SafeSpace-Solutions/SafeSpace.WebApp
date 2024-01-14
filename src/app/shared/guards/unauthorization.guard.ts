@@ -2,9 +2,9 @@ import { inject } from "@angular/core";
 import { CanActivateFn, Router } from "@angular/router";
 import { AccountService } from "src/app/account/account.service";
 import { User } from "../interfaces/common.interfaces";
-import { map } from "rxjs";
+import { Observable, map } from "rxjs";
 
-export const unauthorizationGuard: CanActivateFn = () => {
+export const unauthorizationGuard: CanActivateFn = (): Observable<boolean> => {
   const accountService = inject(AccountService);
   const router = inject(Router);
   return accountService.user$.pipe(
@@ -13,7 +13,7 @@ export const unauthorizationGuard: CanActivateFn = () => {
         router.navigate(['dashboard/home']);
         return false;
       } else {
-        return true; 
+        return true;
       }
     })
   );
