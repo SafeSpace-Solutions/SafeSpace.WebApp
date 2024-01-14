@@ -1,4 +1,4 @@
-import { Inject, inject } from '@angular/core';
+import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
 import { AccountService } from 'src/app/account/account.service';
 import { User } from '../interfaces/common.interfaces';

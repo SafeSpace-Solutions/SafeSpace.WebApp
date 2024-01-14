@@ -46,4 +46,3 @@ export const TOAST_MESSAGE_CONSTANTS = {
         UNSAVED_CHANGES: { detail: "Warning", summary: MESSAGE_CONSTANTS.WARNING.UNSAVED_CHANGES, duration: 5000 }
     }
 };
-
