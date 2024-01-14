@@ -18,6 +18,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   inputType: string = 'password';
   isText: boolean = false;
   eyeIcon: string = 'bi-eye-slash';
+  loader = false;
 
   private subscriptions: Array<Subscription> = [];
 
@@ -34,6 +35,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   public login(){
     this.submitted = true;
     if(this.loginForm.valid){
+      this.loader = true;
       this.subscriptions.push(
         this.accountService.login(this.loginForm.value).subscribe({
           next: (response) =>{
@@ -42,6 +44,7 @@ export class LoginComponent implements OnInit, OnDestroy {
             this.router.navigateByUrl('/dashboard');
           },
           error: (error) =>{
+            this.loader = false;
             if(error.error === MESSAGE_CONSTANTS.ERRORS.INVALID_CREDENTIALS){
               this.toast.error(TOAST_MESSAGE_CONSTANTS.ERRORS.INVALID_CREDENTIALS);
             }

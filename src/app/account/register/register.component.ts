@@ -23,7 +23,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
   inputType: string = 'password';
   isText: boolean = false;
   eyeIcon: string = 'bi-eye-slash';
-
+  loader = false;
   private subscriptions: Array<Subscription> = [];
 
 
@@ -41,6 +41,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
     this.submitted = true;
     this.errorMessages = [];
     if(this.registerForm.valid){
+      this.loader = true;
       this.subscriptions.push(
         this.accountService.register(this.registerForm.value).subscribe({
           next: (response) =>{
@@ -48,6 +49,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
             this.router.navigateByUrl('/account/login');
           },
           error: (error) =>{
+            this.loader = false;
             if(error.error === MESSAGE_CONSTANTS.ERRORS.EMAIL_EXISTS){
               this.toast.error(TOAST_MESSAGE_CONSTANTS.ERRORS.EMAIL_EXISTS);
             }

@@ -13,3 +13,8 @@ export interface LoginModel{
     password: string;
 }
 
+export interface ResetPasswordModel {
+    token: string;
+    email: string;
+    newPassword: string;
+}

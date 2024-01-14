@@ -73,7 +73,11 @@
                                 *ngIf="submitted && registerForm.get('password')?.hasError('minlength') || registerForm.get('password')?.hasError('maxlength')">
                                 Password must be at least 6 characters
                             </small>
-                            <button type="submit" class="btn btn-primary btn-block mt-4 w-100">Create Account</button>
+                            <button *ngIf="!loader" type="submit" class="btn btn-primary btn-block mt-4 w-100">Create Account</button>
+                            <button *ngIf="loader" class="btn btn-primary  btn-block mt-4 w-100" type="button" disabled>
+                                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                Creating Account
+                              </button>
                             <div class="text-center pt-4 text-muted">
                                 Already have an account? <a id="forget" routerLink="/account/login">Login</a>
                             </div>

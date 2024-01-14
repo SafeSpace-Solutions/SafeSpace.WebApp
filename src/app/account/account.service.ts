@@ -1,6 +1,6 @@
 import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { LoginModel, RegisterModel } from './account.interfaces';
+import { LoginModel, RegisterModel, ResetPasswordModel as ResetPasswordModel } from './account.interfaces';
 import { environment } from 'src/environments/environment.development';
 import { User } from '../shared/interfaces/common.interfaces';
 import { BehaviorSubject, ReplaySubject, map, of } from 'rxjs';
@@ -16,6 +16,14 @@ export class AccountService {
   private userSource = new ReplaySubject<User | null>(1);
   public user$ = this.userSource.asObservable();
 
+
+  forgotPassword(email: string) {
+    return this.http.post(`${environment.appUrl}/api/account/forgot-password/${email}`, {});
+  }
+
+  resetPassword(model: ResetPasswordModel) {
+    return this.http.put(`${environment.appUrl}/api/account/reset-password`, model);
+  }
 
   refreshUser(jwt: string|null) {
     if(jwt == null){
