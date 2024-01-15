@@ -10,7 +10,8 @@
                     <div class="panel-body p-3">
                         <form [formGroup]="registerForm" (ngSubmit)="register()" autocomplete="off">
                             <div class="form-group pt-3">
-                                <div class="input-field" [class.error]="submitted && registerForm.get('firstName')?.errors">
+                                <div class="input-field"
+                                    [class.error]="submitted && registerForm.get('firstName')?.errors">
                                     <span class="fa fa-user p-2"></span>
                                     <input formControlName="firstName" type="text" placeholder="First Name">
                                 </div>
@@ -18,7 +19,8 @@
                             <small *ngIf="submitted && registerForm.get('firstName')?.hasError('required')"
                                 class="text-danger">First name is required</small>
                             <div class="form-group pt-3">
-                                <div class="input-field" [class.error]="submitted && registerForm.get('lastName')?.errors">
+                                <div class="input-field"
+                                    [class.error]="submitted && registerForm.get('lastName')?.errors">
                                     <span class="fa fa-user p-2"></span>
                                     <input formControlName="lastName" type="text" placeholder="Last Name">
                                 </div>
@@ -27,18 +29,15 @@
                                 class="text-danger">Last name is required</small>
                             <div class="form-group pt-3">
                                 <div class="row">
-                                    <!-- Gender Dropdown -->
                                     <div class="col form-group">
-                                        <select formControlName="gender" class="form-control" >
+                                        <select formControlName="gender" class="form-control">
                                             <option value="null" disabled selected>Select Your Gender</option>
                                             <option *ngFor="let gender of userGenders" [value]="gender">{{ gender }}
                                             </option>
                                         </select>
-                                        <!-- Gender Validation -->
                                         <small *ngIf="submitted && registerForm.get('gender')?.hasError('required')"
                                             class="text-danger">Gender is required</small>
                                     </div>
-                                    <!-- Age Number Input -->
                                     <div class="col" [class.error]="submitted && registerForm.get('age')?.errors">
                                         <input type="number" formControlName="age" class="form-control"
                                             placeholder="Age">
@@ -61,7 +60,8 @@
                                 *ngIf="submitted && registerForm.get('email')?.hasError('pattern')">Invalid email
                                 address</small>
                             <div class="form-group pt-3">
-                                <div class="input-field" [class.error]="submitted && registerForm.get('password')?.errors">
+                                <div class="input-field"
+                                    [class.error]="submitted && registerForm.get('password')?.errors">
                                     <span class="fa fa-lock p-2"></span>
                                     <input formControlName="password" [type]="inputType" placeholder="Password">
                                     <span (click)="togglePasswordVisibility()" class="bi {{eyeIcon}}"></span>
@@ -73,11 +73,12 @@
                                 *ngIf="submitted && registerForm.get('password')?.hasError('minlength') || registerForm.get('password')?.hasError('maxlength')">
                                 Password must be at least 6 characters
                             </small>
-                            <button *ngIf="!loader" type="submit" class="btn btn-primary btn-block mt-4 w-100">Create Account</button>
+                            <button *ngIf="!loader" type="submit" class="btn btn-primary btn-block mt-4 w-100">Create
+                                Account</button>
                             <button *ngIf="loader" class="btn btn-primary  btn-block mt-4 w-100" type="button" disabled>
                                 <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                                 Creating Account
-                              </button>
+                            </button>
                             <div class="text-center pt-4 text-muted">
                                 Already have an account? <a id="forget" routerLink="/account/login">Login</a>
                             </div>

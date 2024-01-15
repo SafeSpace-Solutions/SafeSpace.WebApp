@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
 import { MESSAGE_CONSTANTS, TOAST_MESSAGE_CONSTANTS } from 'src/app/shared/constants/common.constants';
 
 @Component({
-  selector: 'app-send-email',
+  selector: 'send-email',
   templateUrl: './send-email.component.html',
   styleUrls: ['./send-email.component.scss']
 })

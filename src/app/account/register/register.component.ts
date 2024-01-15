@@ -8,27 +8,30 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'app-register',
+  selector: 'register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit, OnDestroy {
 
-  
+
   public registerForm: FormGroup = new FormGroup({});
-  submitted = false;
-  errorMessages: string[] = [];
-  userGenders = [UserGender.Male, UserGender.Female, UserGender.Other];
-  userRole = UserRoles.Seeker;
-  inputType: string = 'password';
-  isText: boolean = false;
-  eyeIcon: string = 'bi-eye-slash';
-  loader = false;
+  public submitted = false;
+  public userGenders = [UserGender.Male, UserGender.Female, UserGender.Other];
+  public userRole = UserRoles.Seeker;
+  public inputType: string = 'password';
+  public isText: boolean = false;
+  public eyeIcon: string = 'bi-eye-slash';
+  public loader = false;
+
   private subscriptions: Array<Subscription> = [];
 
 
-  constructor(private accountService: AccountService, private formBuilder: FormBuilder, private toast: NgToastService, private router: Router) { }
-     
+  constructor(private accountService: AccountService,
+     private formBuilder: FormBuilder,
+     private toast: NgToastService,
+     private router: Router) { }
+
   public ngOnInit(): void {
     this.initializeForm();
   }
@@ -37,23 +40,22 @@ export class RegisterComponent implements OnInit, OnDestroy {
     this.subscriptions.forEach(subscription => subscription.unsubscribe());
   }
 
-  public register(){
+  public register(): void {
     this.submitted = true;
-    this.errorMessages = [];
-    if(this.registerForm.valid){
+    if (this.registerForm.valid) {
       this.loader = true;
       this.subscriptions.push(
         this.accountService.register(this.registerForm.value).subscribe({
-          next: (response) =>{
+          next: () => {
             this.toast.success(TOAST_MESSAGE_CONSTANTS.SUCCESS.ACCOUNT_REGISTERED);
             this.router.navigateByUrl('/account/login');
           },
-          error: (error) =>{
+          error: (error) => {
             this.loader = false;
-            if(error.error === MESSAGE_CONSTANTS.ERRORS.EMAIL_EXISTS){
+            if (error.error === MESSAGE_CONSTANTS.ERRORS.EMAIL_EXISTS) {
               this.toast.error(TOAST_MESSAGE_CONSTANTS.ERRORS.EMAIL_EXISTS);
             }
-            else{
+            else {
               this.toast.error(TOAST_MESSAGE_CONSTANTS.ERRORS.SERVER_ERROR);
             }
           }
@@ -62,7 +64,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
     }
   }
 
-  public togglePasswordVisibility() {
+  public togglePasswordVisibility(): void {
     this.isText = !this.isText;
     this.isText ? this.eyeIcon = 'bi-eye' : this.eyeIcon = 'bi-eye-slash';
     this.isText ? this.inputType = 'text' : this.inputType = 'password';
@@ -79,5 +81,4 @@ export class RegisterComponent implements OnInit, OnDestroy {
       role: [this.userRole, Validators.required]
     });
   }
-
 }

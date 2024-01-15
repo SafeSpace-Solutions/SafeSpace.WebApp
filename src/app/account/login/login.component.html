@@ -1,4 +1,52 @@
-<div class="outer">
+<div class="container">
+    <div class="left-section">
+        <h1>One Solution For Mental Health</h1>
+    </div>
+    <div class="right-section">
+        <div class="form-container">
+            <div class=" pt-3 heading title">
+                <div>
+                    <h1>SafeSpace</h1>
+                </div>
+            </div>
+            <form [formGroup]="loginForm" (ngSubmit)="login()" autocomplete="off">
+                <div class="form-group pt-3">
+                    <div class="input-field" [class.error]="submitted && loginForm.get('email')?.errors">
+                        <span class="fa fa-envelope p-2"></span>
+                        <input formControlName="email" type="text" placeholder="Email">
+                    </div>
+                </div>
+                <small *ngIf="submitted && loginForm.get('email')?.hasError('required')" class="text-danger">Email is
+                    required</small>
+                <div class="form-group pt-3">
+                    <div class="input-field" [class.error]="submitted && loginForm.get('password')?.errors">
+                        <span class="fa fa-lock p-2"></span>
+                        <input formControlName="password" [type]="inputType" placeholder="Password">
+                        <span (click)="togglePasswordVisibility()" class="bi {{eyeIcon}}"></span>
+                    </div>
+                </div>
+                <div class="form-inline fr mt-4">
+                    <a id="forget" class="font-weight-bold" routerLink="/account/forgot-password">Forget Password</a>
+                </div>
+                <small *ngIf="submitted && loginForm.get('password')?.hasError('required')" class="text-danger">Password
+                    is required</small>
+                <button *ngIf="!loader" type="submit" class="btn btn-primary btn-block mt-4 w-100">Login</button>
+                <button *ngIf="loader" class="btn btn-primary  btn-block mt-4 w-100" type="button" disabled>
+                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                    Logging In
+                </button>
+                <div class="text-center pt-4 text-muted">
+                    Don't have an account? <a id="forget" routerLink="/account/register">Register now</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
+<!-- <div class="outer">
     <div class="container">
         <div class="row">
             <div class="offset-md-2 col-lg-5 col-md-7 offset-lg-4 offset-md-3">
@@ -42,4 +90,4 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->

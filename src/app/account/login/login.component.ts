@@ -7,23 +7,25 @@ import { Subscription } from 'rxjs';
 import { MESSAGE_CONSTANTS, TOAST_MESSAGE_CONSTANTS } from 'src/app/shared/constants/common.constants';
 
 @Component({
-  selector: 'app-login',
+  selector: 'login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit, OnDestroy {
   public loginForm: FormGroup = new FormGroup({});
-  submitted = false;
-  errorMessages: string[] = [];
-  inputType: string = 'password';
-  isText: boolean = false;
-  eyeIcon: string = 'bi-eye-slash';
-  loader = false;
+  public submitted = false;
+  public inputType: string = 'password';
+  public isText: boolean = false;
+  public eyeIcon: string = 'bi-eye-slash';
+  public loader = false;
 
   private subscriptions: Array<Subscription> = [];
 
-  constructor(private accountService: AccountService, private formBuilder: FormBuilder, private toast: NgToastService, private router: Router) { }
-  
+  constructor(private accountService: AccountService,
+     private formBuilder: FormBuilder,
+     private toast: NgToastService,
+     private router: Router) { }
+
   public ngOnInit(): void {
     this.initializeForm();
   }
@@ -32,23 +34,23 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.subscriptions.forEach(subscription => subscription.unsubscribe());
   }
 
-  public login(){
+  public login(): void {
     this.submitted = true;
-    if(this.loginForm.valid){
+    if (this.loginForm.valid) {
       this.loader = true;
       this.subscriptions.push(
         this.accountService.login(this.loginForm.value).subscribe({
-          next: (response) =>{
+          next: (response) => {
             console.log(response);
             this.toast.success(TOAST_MESSAGE_CONSTANTS.SUCCESS.LOGGED_IN);
             this.router.navigateByUrl('/dashboard');
           },
-          error: (error) =>{
+          error: (error) => {
             this.loader = false;
-            if(error.error === MESSAGE_CONSTANTS.ERRORS.INVALID_CREDENTIALS){
+            if (error.error === MESSAGE_CONSTANTS.ERRORS.INVALID_CREDENTIALS) {
               this.toast.error(TOAST_MESSAGE_CONSTANTS.ERRORS.INVALID_CREDENTIALS);
             }
-            else{
+            else {
               this.toast.error(TOAST_MESSAGE_CONSTANTS.ERRORS.SERVER_ERROR);
             }
           }
@@ -57,7 +59,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     }
   }
 
-  public togglePasswordVisibility() {
+  public togglePasswordVisibility(): void {
     this.isText = !this.isText;
     this.isText ? this.eyeIcon = 'bi-eye' : this.eyeIcon = 'bi-eye-slash';
     this.isText ? this.inputType = 'text' : this.inputType = 'password';

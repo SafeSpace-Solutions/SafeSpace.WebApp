@@ -9,7 +9,7 @@ import { NgToastService } from 'ng-angular-popup';
 import { TOAST_MESSAGE_CONSTANTS } from 'src/app/shared/constants/common.constants';
 
 @Component({
-  selector: 'app-reset-password',
+  selector: 'reset-password',
   templateUrl: './reset-password.component.html',
   styleUrls: ['./reset-password.component.scss']
 })
@@ -59,7 +59,7 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
     this.subscriptions.forEach(subscription => subscription.unsubscribe());
   }
 
-  public resetPassword() {
+  public resetPassword(): void {
     this.submitted = true;
     if (this.resetPasswordForm.valid && this.email && this.token) {
       this.loader = true;

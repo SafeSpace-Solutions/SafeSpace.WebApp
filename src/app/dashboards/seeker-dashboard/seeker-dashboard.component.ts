@@ -5,7 +5,7 @@ import { SEEKER_NAVBAR_ITEMS } from './seeker-dashboard.constants';
 import { INavbarItem } from '../shared/dashboard-nav-bar/dashboard-nav-bar..interfaces';
 
 @Component({
-  selector: 'app-seeker-dashboard',
+  selector: 'seeker-dashboard',
   templateUrl: './seeker-dashboard.component.html',
   styleUrls: ['./seeker-dashboard.component.scss']
 })

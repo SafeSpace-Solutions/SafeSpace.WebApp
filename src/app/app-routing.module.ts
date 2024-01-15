@@ -1,19 +1,21 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { authorizationGuard } from './shared/guards/authorization.guard';
-import { unauthorizationGuard } from './shared/guards/unauthorization.guard';
+import { authenticationGuard } from './shared/guards/authentication.guard';
+import { authenticatedSessionGuard } from './shared/guards/authenticated-session.guard';
+import { seekerAuthorizationGuard } from './shared/guards/seeker-authorization.guard';
 
 const routes: Routes = [
   {
     path: 'account',
     loadChildren: () => import('./account/account.module').then(module => module.AccountModule),
-    canActivate: [unauthorizationGuard]
+    canActivate: [authenticatedSessionGuard]
   },
 
   {
     path: 'dashboard',
     loadChildren: () => import('./dashboards/seeker-dashboard/seeker-dashboard.module').then(m => m.SeekerDashboardModule),
-    canActivate: [authorizationGuard]
+    canActivate: [authenticationGuard],
+    canMatch: [seekerAuthorizationGuard]
   },
 
   {
