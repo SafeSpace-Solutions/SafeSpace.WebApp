@@ -15,8 +15,9 @@ const routes: Routes = [
       { path: 'chat', component: ChatComponent },
       { path: 'profile', component: UserProfileComponent },
       { path: 'my-appointments', component: SeekerAppointmentsComponent },
+      { path: '', redirectTo: 'home', pathMatch: 'full' }
     ]
-  }
+  },
 ];
 
 @NgModule({
