@@ -16,7 +16,6 @@ export class AccountService {
   private userSource = new ReplaySubject<User | null>(1);
   public user$ = this.userSource.asObservable();
 
-
   public login(model: LoginModel): Observable<User | null> {
     return this.http.post<User>(`${environment.appUrl}/api/account/login`, model).pipe(
       map((user: User) => {
@@ -65,15 +64,15 @@ export class AccountService {
   public getJwt(): string | null {
     const key = localStorage.getItem(environment.userKey);
     if (key) {
-      const user: User = JSON.parse(key);
-      return user.jwt;
+      const jwt: string = JSON.parse(key);
+      return jwt;
     }
     else
       return null;
   }
 
   private setUser(user: User): void {
-    localStorage.setItem(environment.userKey, JSON.stringify(user));
+    localStorage.setItem(environment.userKey, JSON.stringify(user.jwt));
     this.userSource.next(user);
   }
 }

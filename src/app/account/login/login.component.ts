@@ -40,8 +40,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       this.loader = true;
       this.subscriptions.push(
         this.accountService.login(this.loginForm.value).subscribe({
-          next: (response) => {
-            console.log(response);
+          next: () => {
             this.toast.success(TOAST_MESSAGE_CONSTANTS.SUCCESS.LOGGED_IN);
             this.router.navigateByUrl('/dashboard');
           },
