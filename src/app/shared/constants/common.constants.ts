@@ -5,7 +5,8 @@ export const MESSAGE_CONSTANTS = {
         SERVER_ERROR: "Something went wrong, please try again later",
         NETWORK_ISSUE: "Please check your network connection",
         EMAIL_DOES_NOT_EXIST: "An account with this email does not exist",
-        PASSWORD_RESET_ERROR: "Unable to reset password, please try again later"
+        PASSWORD_RESET_ERROR: "Unable to reset password, please try again later",
+        NOT_AUTHORISED:"Not Authorised to view this page"
     },
 
     SUCCESS: {
@@ -30,6 +31,7 @@ export const TOAST_MESSAGE_CONSTANTS = {
     EMAIL_EXISTS: { detail: "Error", summary: MESSAGE_CONSTANTS.ERRORS.EMAIL_EXISTS, duration: 5000 },
     SERVER_ERROR: { detail: "Error", summary: MESSAGE_CONSTANTS.ERRORS.SERVER_ERROR, duration: 5000 },
     NETWORK_ISSUE: { detail: "Error", summary: MESSAGE_CONSTANTS.ERRORS.NETWORK_ISSUE, duration: 5000 },
+    NOT_AUTHORISED:{ detail:"Error", summary:MESSAGE_CONSTANTS.ERRORS.NOT_AUTHORISED, duration:5000 },
   },
 
   SUCCESS: {
