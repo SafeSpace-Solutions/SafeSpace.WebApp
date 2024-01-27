@@ -25,7 +25,7 @@ export class AppComponent implements OnInit, OnDestroy {
     const jwt = this.accountService.getJwt();
     if (jwt) {
       this.subscriptions.push(
-        this.accountService.refreshUser(jwt).subscribe({
+        this.accountService.refreshPage(jwt).subscribe({
           next: _ => { },
           error: _ => {
             this.accountService.logout();
@@ -35,7 +35,7 @@ export class AppComponent implements OnInit, OnDestroy {
     }
     else {
       this.subscriptions.push(
-        this.accountService.refreshUser(null).subscribe()
+        this.accountService.refreshPage(null).subscribe()
       )
     }
   }

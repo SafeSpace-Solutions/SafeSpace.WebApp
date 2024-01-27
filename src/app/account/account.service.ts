@@ -45,14 +45,14 @@ export class AccountService {
     return this.http.put(`${environment.appUrl}/api/account/reset-password`, model);
   }
 
-  public refreshUser(jwt: string | null): Observable<null | void> {
+  public refreshPage(jwt: string | null): Observable<null | void> {
     if (jwt == null) {
       this.userSource.next(null);
       return of(null)
     }
     let headers = new HttpHeaders();
     headers = headers.set('Authorization', `Bearer ${jwt}`);
-    return this.http.get<User>(`${environment.appUrl}/api/account/refresh-user-token`, { headers }).pipe(
+    return this.http.get<User>(`${environment.appUrl}/api/account/refresh-page`, { headers }).pipe(
       map((user: User) => {
         if (user) {
           this.setUser(user);
