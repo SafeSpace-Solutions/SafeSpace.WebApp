@@ -30,7 +30,7 @@
                             <div class="form-group pt-3">
                                 <div class="row">
                                     <div class="col form-group">
-                                        <select formControlName="gender" class="form-control">
+                                        <select formControlName="gender" name="gender" class="form-select" [class.error]="submitted && registerForm.get('gender')?.errors">
                                             <option value="null" disabled selected>Select Your Gender</option>
                                             <option *ngFor="let gender of userGenders" [value]="gender">{{ gender }}
                                             </option>
