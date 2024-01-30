@@ -10,12 +10,6 @@ import { INavbarItem } from '../shared/dashboard-nav-bar/dashboard-nav-bar..inte
   styleUrls: ['./seeker-dashboard.component.scss']
 })
 export class SeekerDashboardComponent {
-
   public seekerNavBarItems: Array<INavbarItem> = SEEKER_NAVBAR_ITEMS;
-  constructor(private router: Router, private location: Location) { }
-
-  public ngOnInit(): void {
-    
-  }
 }
 
